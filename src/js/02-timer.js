@@ -1,2 +1,2 @@
-console.log("task-02");
-alert("task-02");
+//console.log("task-02");
+//alert("task-02");
