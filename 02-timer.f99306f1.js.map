@@ -1,1 +1,0 @@
-{"mappings":"AAAAA,QAAQC,IAAI,WACZC,MAAM","sources":["src/js/02-timer.js"],"sourcesContent":["console.log(\"task-02\");\nalert(\"task-02\");\n"],"names":["console","log","alert"],"version":3,"file":"02-timer.f99306f1.js.map"}

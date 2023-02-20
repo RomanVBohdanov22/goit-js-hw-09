@@ -1,1 +1,0 @@
-{"mappings":"AAAAA,QAAQC,IAAI,WACZC,MAAM","sources":["src/js/01-color-switcher.js"],"sourcesContent":["console.log(\"task-01\");\nalert(\"task-01\");\n"],"names":["console","log","alert"],"version":3,"file":"01-color-switcher.0e3f51de.js.map"}
