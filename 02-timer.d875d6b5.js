@@ -1,0 +1,2 @@
+const e=document.querySelector("#datetime-picker"),t=document.querySelector("button[data-start]");document.querySelector(".timer .value[data-days]"),document.querySelector(".timer .value[data-hours]"),document.querySelector(".timer .value[data-minutes]"),document.querySelector(".timer .value[data-seconds]");t.addEventListener("click",(function(t){let o=e.value.trim();console.log(o);const a=new Date(o),c=new Date;console.log(a-c)}));
+//# sourceMappingURL=02-timer.d875d6b5.js.map
