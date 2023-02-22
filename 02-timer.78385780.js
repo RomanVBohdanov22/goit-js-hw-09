@@ -1,0 +1,2 @@
+!function(){var e=document.querySelector("#datetime-picker"),t=document.querySelector("button[data-start]");document.querySelector(".timer .value[data-days]"),document.querySelector(".timer .value[data-hours]"),document.querySelector(".timer .value[data-minutes]"),document.querySelector(".timer .value[data-seconds]");t.addEventListener("click",(function(t){var r=e.value.trim();console.log(r);var a=new Date(r);console.log(a)}))}();
+//# sourceMappingURL=02-timer.78385780.js.map
