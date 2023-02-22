@@ -14,7 +14,8 @@ function onButtonStart(e) {
     let textDate = inputLnk.value.trim();
     console.log(textDate);
     const date = new Date(textDate);
-    console.log(date);
+    const currentDate = new Date();
+    console.log(date - currentDate);
 }
 //spanDaysLnk.textContent = 22;
 //console.log("hello");
