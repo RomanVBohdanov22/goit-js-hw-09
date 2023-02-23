@@ -22,7 +22,16 @@ function onButtonStart(e) {
     const diffMilliseconds = Math.abs(currentMillisexonds - startMilliseconds);
     console.log("dt ", diffMilliseconds);
     const diffDate = new Date(diffMilliseconds);
-    
+
+    const year = Math.abs(diffDate.getFullYear() - 1970);
+    const month = diffDate.getMonth();
+    const day = diffDate.getDay();
+    const hours = diffDate.getHours();
+    const minutes = diffDate.getMinutes();
+    const seconds = diffDate.getSeconds();
+
+    console.log(`year ${year} : month ${month} : day ${day} : hours ${hours} : minutes ${minutes} : seconds ${seconds}`);
+
 
     //console.log(diffDate);
    // console.log(date.getFullYear());
