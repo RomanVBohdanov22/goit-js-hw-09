@@ -13,12 +13,21 @@ buttonStartLnk.addEventListener("click", onButtonStart);
 function onButtonStart(e) { 
     let textDate = inputLnk.value.trim();
     console.log(textDate);
+
     const date = new Date(textDate);
     const currentDate = new Date();
-    console.log(date - currentDate);
+    const startMilliseconds = date.getTime();
+    const currentMillisexonds = currentDate.getTime();
+    
+    const diffMilliseconds = Math.abs(currentMillisexonds - startMilliseconds);
+    console.log("dt ", diffMilliseconds);
+    const diffDate = new Date(diffMilliseconds);
+    
+
+    //console.log(diffDate);
+   // console.log(date.getFullYear());
+   // console.log(currentDate.getFullYear());
 }
-//spanDaysLnk.textContent = 22;
-//console.log("hello");
 
 /*
     <input type="text" id="datetime-picker" />
