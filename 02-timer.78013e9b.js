@@ -1,2 +1,0 @@
-!function(){var e=document.querySelector("#datetime-picker"),t=document.querySelector("button[data-start]");document.querySelector(".timer .value[data-days]"),document.querySelector(".timer .value[data-hours]"),document.querySelector(".timer .value[data-minutes]"),document.querySelector(".timer .value[data-seconds]");t.addEventListener("click",(function(t){var a=e.value.trim();console.log(a);var r=new Date(a),o=new Date,u=r.getTime(),c=o.getTime(),n=Math.abs(c-u);console.log("dt ",n);new Date(n)}))}();
-//# sourceMappingURL=02-timer.78013e9b.js.map
