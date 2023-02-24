@@ -8,7 +8,7 @@ import "flatpickr/dist/flatpickr.min.css";
 
 const inputLnk = document.querySelector('#datetime-picker');
 const buttonStartLnk = document.querySelector('button[data-start]');
-
+buttonStartLnk.setAttribute('disabled', true);
 const spanDaysLnk = document.querySelector('.timer .value[data-days]');
 const spanHoursLnk = document.querySelector('.timer .value[data-hours]');
 const spanMinutesLnk = document.querySelector('.timer .value[data-minutes]');
@@ -20,7 +20,13 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
+      console.log(selectedDates[0]);
+      const selectedTime = selectedDates[0].getTime();
+      console.log(selectedTime);
+      const currentTime = (new Date()).getTime();
+      const differTime = selectedTime - currentTime;
+      if (differTime < 0) Notify.warning("Please choose a date in the future");
+      else buttonStartLnk.removeAttribute('disabled');
   },
 };
 
@@ -45,9 +51,10 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+//console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
+//console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
+//console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+
 
 buttonStartLnk.addEventListener("click", onButtonStart);
 
@@ -57,20 +64,37 @@ function onButtonStart(e) {
     
     let textDate = inputLnk.value.trim();
     console.log(textDate);
-    //const date = new Date(textDate);
-    
-
     timerId = setInterval(() => {
-    dumbTimer((new Date(textDate)).getTime());
+    hw9Timer((new Date(textDate)).getTime());
   }, 1000);   
+
+}
+
+function addLeadingZero(value){ 
+    if (value.length >= 3) return value;
+    return value.padStart(2, '0');   
+}
+
+function hw9Timer(targetMilliseconds) { 
+    const diffTime = targetMilliseconds - (new Date()).getTime();
+    const convertedTimeObj = convertMs(diffTime);
+
+    if (diffTime < 0) {
+        clearInterval(timerId);
+        return;
+    }
+
+    spanDaysLnk.textContent = addLeadingZero(String(convertedTimeObj.days));
+    spanHoursLnk.textContent = addLeadingZero(String(convertedTimeObj.hours));
+    spanMinutesLnk.textContent = addLeadingZero(String(convertedTimeObj.minutes));
+    spanSecondsLnk.textContent = addLeadingZero(String(convertedTimeObj.seconds));
 
 }
 
 function dumbTimer(startMilliseconds)
 { 
     const currentDate = new Date();
-    //const currentMillisexonds = currentDate.getTime();
-    //const startMilliseconds = startDate.getTime();
+
     const diffMilliseconds = (currentDate.getTime() - startMilliseconds);
 
     if (diffMilliseconds > 0) { clearInterval(timerId); }
@@ -79,8 +103,6 @@ function dumbTimer(startMilliseconds)
 
     const diffDate = new Date(Math.abs(diffMilliseconds));
 
-    //const year = Math.abs(diffDate.getFullYear() - 1970);
-    //const month = diffDate.getMonth();
 
     const dayOfMonth = diffDate.getDate() - 1;
    
@@ -93,26 +115,3 @@ function dumbTimer(startMilliseconds)
     spanMinutesLnk.textContent = minutes;
     spanSecondsLnk.textContent = seconds;
 }
-/*
-    <input type="text" id="datetime-picker" />
-    <button type="button" data-start>Start</button>
-
-    <div class="timer">
-      <div class="field">
-        <span class="value" data-days>00</span>
-        <span class="label">Days</span>
-      </div>
-      <div class="field">
-        <span class="value" data-hours>00</span>
-        <span class="label">Hours</span>
-      </div>
-      <div class="field">
-        <span class="value" data-minutes>00</span>
-        <span class="label">Minutes</span>
-      </div>
-      <div class="field">
-        <span class="value" data-seconds>00</span>
-        <span class="label">Seconds</span>
-      </div>
-    </div>
-*/

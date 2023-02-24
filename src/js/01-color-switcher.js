@@ -8,6 +8,7 @@ const btnStopLnk = document.querySelector('button[data-stop]');
 
 let timerId = null;
 
+
 btnStartLnk.addEventListener('click', onStartClick);
 console.log(btnStartLnk.attributes);
 function onStartClick(e) {
