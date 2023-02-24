@@ -1,5 +1,3 @@
-//import _ from 'lodash';
-
 import { Notify } from 'notiflix/build/notiflix-notify-aio'; //npm i notiflix
 // Описаний в документації
 import flatpickr from "flatpickr";
