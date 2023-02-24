@@ -6,9 +6,10 @@ import flatpickr from "flatpickr";
 // Додатковий імпорт стилів
 import "flatpickr/dist/flatpickr.min.css";
 
-const inputLnk = document.querySelector('#datetime-picker');
+const inputLnk = document.querySelector('input#datetime-picker');
 const buttonStartLnk = document.querySelector('button[data-start]');
 buttonStartLnk.setAttribute('disabled', true);
+
 const spanDaysLnk = document.querySelector('.timer .value[data-days]');
 const spanHoursLnk = document.querySelector('.timer .value[data-hours]');
 const spanMinutesLnk = document.querySelector('.timer .value[data-minutes]');
@@ -29,7 +30,7 @@ const options = {
   },
 };
 
-flatpickr("input#datetime-picker", options);
+flatpickr(inputLnk, options);
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -56,7 +57,8 @@ buttonStartLnk.addEventListener("click", onButtonStart);
 
 let timerId = null;
 
-function onButtonStart(e) {     
+function onButtonStart(e) {   
+    buttonStartLnk.setAttribute('disabled', true);
     timerId = setInterval(() => {
     hw9Timer((new Date(inputLnk.value.trim())).getTime());
   }, 1000);   
@@ -75,6 +77,7 @@ function hw9Timer(targetMilliseconds) {
 
     if (diffTime < 0) {
         clearInterval(timerId);
+        
         return;
     }
 
