@@ -22,7 +22,6 @@ const options = {
   onClose(selectedDates) {
       console.log(selectedDates[0]);
       const selectedTime = selectedDates[0].getTime();
-      console.log(selectedTime);
       const currentTime = (new Date()).getTime();
       const differTime = selectedTime - currentTime;
       if (differTime < 0) Notify.warning("Please choose a date in the future");
@@ -50,9 +49,6 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-
-//console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-//console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
 //console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
 
 
@@ -60,17 +56,15 @@ buttonStartLnk.addEventListener("click", onButtonStart);
 
 let timerId = null;
 
-function onButtonStart(e) { 
-    
-    let textDate = inputLnk.value.trim();
-    console.log(textDate);
+function onButtonStart(e) {     
     timerId = setInterval(() => {
-    hw9Timer((new Date(textDate)).getTime());
+    hw9Timer((new Date(inputLnk.value.trim())).getTime());
   }, 1000);   
 
 }
 
 function addLeadingZero(value){ 
+    value = String(value);
     if (value.length >= 3) return value;
     return value.padStart(2, '0');   
 }
@@ -84,34 +78,9 @@ function hw9Timer(targetMilliseconds) {
         return;
     }
 
-    spanDaysLnk.textContent = addLeadingZero(String(convertedTimeObj.days));
-    spanHoursLnk.textContent = addLeadingZero(String(convertedTimeObj.hours));
-    spanMinutesLnk.textContent = addLeadingZero(String(convertedTimeObj.minutes));
-    spanSecondsLnk.textContent = addLeadingZero(String(convertedTimeObj.seconds));
+    spanDaysLnk.textContent = addLeadingZero(convertedTimeObj.days);
+    spanHoursLnk.textContent = addLeadingZero(convertedTimeObj.hours);
+    spanMinutesLnk.textContent = addLeadingZero(convertedTimeObj.minutes);
+    spanSecondsLnk.textContent = addLeadingZero(convertedTimeObj.seconds);
 
-}
-
-function dumbTimer(startMilliseconds)
-{ 
-    const currentDate = new Date();
-
-    const diffMilliseconds = (currentDate.getTime() - startMilliseconds);
-
-    if (diffMilliseconds > 0) { clearInterval(timerId); }
-
-    console.log("dt ", diffMilliseconds);
-
-    const diffDate = new Date(Math.abs(diffMilliseconds));
-
-
-    const dayOfMonth = diffDate.getDate() - 1;
-   
-    const hours = diffDate.getHours();
-    const minutes = diffDate.getMinutes();
-    const seconds = diffDate.getSeconds();
-      
-    spanDaysLnk.textContent = dayOfMonth;
-    spanHoursLnk.textContent = hours;
-    spanMinutesLnk.textContent = minutes;
-    spanSecondsLnk.textContent = seconds;
 }
