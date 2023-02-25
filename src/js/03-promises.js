@@ -40,8 +40,8 @@ function onFormSubmit(e) {
 
   promise.then(
     result => { console.log(result); },
-    error => { console.log(error); },
-  );
+    //error => { console.log(error); },
+  ).catch(error => { console.log(error); },);
 
 }
 }
