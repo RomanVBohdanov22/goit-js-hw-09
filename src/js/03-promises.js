@@ -1,3 +1,4 @@
+import { result } from 'lodash';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const refsToForm = {
@@ -28,18 +29,31 @@ function onFormSubmit(e) {
     console.log(`d= ${delay} , s= ${step} , a=${amount}`);
   } else Notify.failure('Make CORRECT choise, pls! (Must be >=0)');
 
-  const position = delay*amount + step;
-    const promise = new Promise(createPromise (position, delay));
+  //const position = delay * amount + step;
+  let position = 1;
+  for (let i = amount; i > 0; i--) { 
+  
+  const promise = new Promise(createPromise(position, delay));
+    delay += step;
+    position += 1;
+  promise.then(
+    result => { console.log(result); },
+    error => { console.log(error); },
+  );
+
+}
 }
 
 
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
-  if (shouldResolve) {
+  setTimeout(() => {
+    if (shouldResolve) {
     Notify.info(`✅ Fulfilled promise ${position} in ${delay}ms`)// Fulfill
   } else {
     Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`)// Reject
   }
+  }, delay)  
 }
 
 /*
