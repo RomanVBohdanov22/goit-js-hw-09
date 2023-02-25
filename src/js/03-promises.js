@@ -38,10 +38,14 @@ function onFormSubmit(e) {
     delay += step;
     position += 1;
 
-  promise.then(
-    result => { console.log(result); },
-    //error => { console.log(error); },
-  ).catch(error => { console.log(error); },);
+    promise
+      .then(
+        result => { console.log(result); },
+        //error => { console.log(error); },
+      )
+      .catch(error => { console.log(error); },)
+      .finally(() => Notify.warning('I am finally!'));
+      ;
 
 }
 }
