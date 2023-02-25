@@ -28,15 +28,17 @@ function onFormSubmit(e) {
     console.log(`d= ${delay} , s= ${step} , a=${amount}`);
   } else Notify.failure('Make CORRECT choise, pls! (Must be >=0)');
 
-
+  const position = delay*amount + step;
+    const promise = new Promise(createPromise (position, delay));
 }
+
 
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
   if (shouldResolve) {
-    // Fulfill
+    Notify.info(`✅ Fulfilled promise ${position} in ${delay}ms`)// Fulfill
   } else {
-    // Reject
+    Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`)// Reject
   }
 }
 
