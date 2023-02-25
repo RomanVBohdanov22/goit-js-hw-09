@@ -18,10 +18,10 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  onClose(selectedDates) {
-      console.log(selectedDates[0]);
-      const selectedTime = selectedDates[0].getTime();
-      const currentTime = (new Date()).getTime();
+  onClose([selectedDates]) {// selectedDates[0]
+      console.log(selectedDates); 
+      const selectedTime = selectedDates.getTime();  // selectedDates[0]
+      const currentTime = Date.now();
       const differTime = selectedTime - currentTime;
       if (differTime < 0) Notify.warning("Please choose a date in the future");
       else buttonStartLnk.removeAttribute('disabled');
@@ -64,24 +64,22 @@ function onButtonStart(e) {
 }
 
 function addLeadingZero(value){ 
-    value = String(value);
-    if (value.length >= 3) return value;
-    return value.padStart(2, '0');   
+    return String(value).padStart(2, '0');   
 }
 
 function hw9Timer(targetMilliseconds) { 
     const diffTime = targetMilliseconds - (new Date()).getTime();
-    const convertedTimeObj = convertMs(diffTime);
-
     if (diffTime < 0) {
-        clearInterval(timerId);
-        
+        clearInterval(timerId);        
         return;
     }
+    toDisplay(convertMs(diffTime));
+}
 
-    spanDaysLnk.textContent = addLeadingZero(convertedTimeObj.days);
-    spanHoursLnk.textContent = addLeadingZero(convertedTimeObj.hours);
-    spanMinutesLnk.textContent = addLeadingZero(convertedTimeObj.minutes);
-    spanSecondsLnk.textContent = addLeadingZero(convertedTimeObj.seconds);
-
+function toDisplay(paramObj = {})
+{
+    spanDaysLnk.textContent = addLeadingZero(paramObj.days);
+    spanHoursLnk.textContent = addLeadingZero(paramObj.hours);
+    spanMinutesLnk.textContent = addLeadingZero(paramObj.minutes);
+    spanSecondsLnk.textContent = addLeadingZero(paramObj.seconds);
 }
