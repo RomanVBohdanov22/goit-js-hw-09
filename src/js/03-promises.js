@@ -33,9 +33,11 @@ function onFormSubmit(e) {
   let position = 1;
   for (let i = amount; i > 0; i--) { 
   
-  const promise = new Promise(createPromise(position, delay));
+    const promise = new Promise(createPromise(position, delay), reject);
+      //new Promise((resolve, reject) => );
     delay += step;
     position += 1;
+
   promise.then(
     result => { console.log(result); },
     error => { console.log(error); },
@@ -55,7 +57,10 @@ function createPromise(position, delay) {
   }
   }, delay)  
 }
-
+function reject(error) { 
+  console.log(error);
+  Notify.failure(`${error}`);
+}
 /*
 createPromise(2, 1500)
   .then(({ position, delay }) => {
