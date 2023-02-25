@@ -8,23 +8,19 @@ const btnStopLnk = document.querySelector('button[data-stop]');
 
 let timerId = null;
 
-
 btnStartLnk.addEventListener('click', onStartClick);
 console.log(btnStartLnk.attributes);
 function onStartClick(e) {
   btnStartLnk.setAttribute('disabled', true);
-  btnStartLnk.removeEventListener('click', onStartClick);
-
-  btnStopLnk.addEventListener('click', onStopClick);
+  startBtnEventOffStopBtnEventOn();
   changeColorCycled();
 }
 
 function onStopClick(e) {
   btnStartLnk.removeAttribute('disabled');
   console.log(btnStartLnk.attributes);
-  btnStartLnk.addEventListener('click', onStartClick);
+  stopBtnEventOffStartBtnEventOn();
 
-  btnStopLnk.removeEventListener('click', onStopClick);
   clearInterval(timerId);
 }
 
@@ -32,4 +28,16 @@ function changeColorCycled() {
   timerId = setInterval(() => {
     bodyLnk.style.backgroundColor = getRandomHexColor();
   }, 1000);
+}
+
+function startBtnEventOffStopBtnEventOn() {
+  btnStartLnk.removeEventListener('click', onStartClick);
+
+  btnStopLnk.addEventListener('click', onStopClick);
+}
+
+function stopBtnEventOffStartBtnEventOn() {
+  btnStartLnk.addEventListener('click', onStartClick);
+
+  btnStopLnk.removeEventListener('click', onStopClick);
 }
